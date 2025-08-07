@@ -52,21 +52,30 @@ const MediaSearchPage: React.FC = () => {
         <Typography variant="h4" gutterBottom>
           Media Search
         </Typography>
-        <SearchBar
-          query={query}
-          onSearch={(q) => {
-            setQuery(q);
-            setPage(1);
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            mb: 2,
           }}
-        />
-        <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-          <PageSizeSelect
-            size={size}
-            onChange={(newSize) => {
-              setSize(newSize);
-              setPage(1);
-            }}
-          />
+        >
+          <Box sx={{ display: 'flex', justifyContent: 'flex-start', gap: 3 }}>
+            <SearchBar
+              query={query}
+              onSearch={(q) => {
+                setQuery(q);
+                setPage(1);
+              }}
+            />
+            <PageSizeSelect
+              size={size}
+              onChange={(newSize) => {
+                setSize(newSize);
+                setPage(1);
+              }}
+            />
+          </Box>
           {data && <Typography variant="subtitle1">Total Results: {data.total}</Typography>}
         </Box>
         {loading && <Loading />}
