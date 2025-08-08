@@ -1,4 +1,6 @@
-Everything is set up. Run `npm i` to install dependencies. Then run 
+Everything is set up. Run the backend service first. 
+
+Then Run `npm i` to install dependencies for frontend. Then run 
 ```bash
 npm run start
 ```
