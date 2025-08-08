@@ -8,7 +8,53 @@ import {
   TableCell,
   Link,
   TableSortLabel,
+  Tooltip,
+  IconButton,
+  Typography,
+  Box,
 } from '@mui/material';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+
+const truncateText = (text: string, maxLength: number): string => {
+  if (!text || text.length <= maxLength) return text;
+
+  let truncated = text.substring(0, maxLength);
+  const lastSpacePos = truncated.lastIndexOf(' ');
+
+  return lastSpacePos <= 0
+    ? text.substring(0, maxLength) + '...'
+    : truncated.substring(0, lastSpacePos) + '...';
+};
+
+interface TruncatedTextProps {
+  text: string;
+  maxLength?: number;
+  emptyPlaceholder?: string;
+}
+
+const TruncatedTextWithTooltip: React.FC<TruncatedTextProps> = ({
+  text,
+  maxLength = 60,
+  emptyPlaceholder = '--',
+}) => {
+  if (!text?.trim()) {
+    return <>{emptyPlaceholder}</>;
+  }
+  const truncated = truncateText(text, maxLength);
+
+  return truncated !== text ? (
+    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+      <Typography component="span">{truncated}</Typography>
+      <Tooltip title={text} arrow>
+        <IconButton size="small" sx={{ ml: 0.5 }}>
+          <InfoOutlinedIcon fontSize="inherit" />
+        </IconButton>
+      </Tooltip>
+    </Box>
+  ) : (
+    <>{text}</>
+  );
+};
 
 interface MediaTableProps {
   results: MediaItem[];
@@ -17,12 +63,7 @@ interface MediaTableProps {
 }
 
 const MediaTable: React.FC<MediaTableProps> = ({ results, sortOrder, onSortToggle }) => (
-  <Table
-    sx={{
-      tableLayout: 'fixed', // force equal distribution
-      width: '100%',
-    }}
-  >
+  <Table sx={{ tableLayout: 'fixed', width: '100%' }}>
     <TableHead>
       <TableRow>
         <TableCell>ID</TableCell>
@@ -39,37 +80,36 @@ const MediaTable: React.FC<MediaTableProps> = ({ results, sortOrder, onSortToggl
     </TableHead>
     <TableBody>
       {results.map((item) => {
-        const largeUrl = item.thumbnailUrl.replace(/\/s\.jpg$/, '/l.jpg');
+        const largeUrl = item.thumbnailUrl.replace(/\/s\.jpg$/, '/m.jpg');
         const smallUrl = item.thumbnailUrl;
+
         return (
-          <TableRow key={item.id}>
+          <TableRow key={item.id} hover>
             <TableCell>{item.id}</TableCell>
-            <TableCell
-              sx={{
-                whiteSpace: 'normal',
-                wordBreak: 'break-word',
-                maxWidth: 600,
-              }}
-            >
-              {item.title}
+            <TableCell sx={{ whiteSpace: 'normal', wordBreak: 'break-word' }}>
+              <TruncatedTextWithTooltip text={item.title} />
             </TableCell>
-            <TableCell
-              sx={{
-                whiteSpace: 'normal',
-                wordBreak: 'break-word',
-                maxWidth: 1000,
-              }}
-            >
-              {item.description?.trim() ? item.description : '--'}
+            <TableCell sx={{ whiteSpace: 'normal', wordBreak: 'break-word' }}>
+              <TruncatedTextWithTooltip text={item.description} emptyPlaceholder="--" />
             </TableCell>
             <TableCell>{item.photographer}</TableCell>
-            <TableCell>{new Date(item.date).toLocaleDateString()}</TableCell>
             <TableCell>
-              <Link href={smallUrl} target="_blank" rel="noopener noreferrer">
+              {new Date(item.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+              })}
+            </TableCell>
+            <TableCell>
+              <Link href={largeUrl} target="_blank" rel="noopener noreferrer">
                 <img
-                  src={largeUrl}
+                  src={smallUrl}
                   alt={item.title}
-                  style={{ maxWidth: '100px', height: 'auto' }}
+                  style={{
+                    maxWidth: '100px',
+                    height: 'auto',
+                    borderRadius: '4px',
+                  }}
                 />
               </Link>
             </TableCell>
@@ -81,3 +121,4 @@ const MediaTable: React.FC<MediaTableProps> = ({ results, sortOrder, onSortToggl
 );
 
 export default MediaTable;
+export { TruncatedTextWithTooltip, truncateText }; // Export if needed elsewhere
