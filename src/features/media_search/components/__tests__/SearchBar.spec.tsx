@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import SearchBar from '../SearchBar';
+import SearchBar from '../../ui/molecules/SearchBar';
 
 describe('SearchBar', () => {
   it('renders the input and button with initial value', () => {

@@ -1,25 +1,19 @@
-// src/features/media_search/components/DateRangeControls.tsx
 import React from 'react';
 import { Box, TextField, Button, Tooltip } from '@mui/material';
-import { parseISO, isValid as isValidDate, isAfter, format } from 'date-fns';
+import { parseISO, isValid as isValidDate, isAfter } from 'date-fns';
 
 type Props = {
-  // Currently applied values (for disabling Apply when unchanged)
   startDate?: string; // 'YYYY-MM-DD'
   endDate?: string; // 'YYYY-MM-DD'
   onApply: (range: { startDate?: string; endDate?: string }) => void;
   onClear?: () => void;
 };
 
-const toISODate = (d: Date) => format(d, 'yyyy-MM-dd');
-
 const DateRangeControls: React.FC<Props> = ({ startDate, endDate, onApply, onClear }) => {
-  // Local, editable inputs
   const [localStart, setLocalStart] = React.useState<string>(startDate ?? '');
   const [localEnd, setLocalEnd] = React.useState<string>(endDate ?? '');
   const [errors, setErrors] = React.useState<{ start?: string; end?: string; cross?: string }>({});
 
-  // Keep local fields in sync if parent resets them (e.g., Clear, new search, etc.)
   React.useEffect(() => {
     setLocalStart(startDate ?? '');
   }, [startDate]);
@@ -32,18 +26,18 @@ const DateRangeControls: React.FC<Props> = ({ startDate, endDate, onApply, onCle
 
     // Both optional, but if one is present, the other must be present to apply
     if (localStart) {
-      const d = parseISO(localStart);
-      if (!isValidDate(d)) nextErrors.start = 'Invalid start date';
+      const paredStart = parseISO(localStart);
+      if (!isValidDate(paredStart)) nextErrors.start = 'Invalid start date';
     }
     if (localEnd) {
-      const d = parseISO(localEnd);
-      if (!isValidDate(d)) nextErrors.end = 'Invalid end date';
+      const parsedEnd = parseISO(localEnd);
+      if (!isValidDate(parsedEnd)) nextErrors.end = 'Invalid end date';
     }
 
     if (localStart && localEnd) {
-      const s = parseISO(localStart);
-      const e = parseISO(localEnd);
-      if (isValidDate(s) && isValidDate(e) && isAfter(s, e)) {
+      const parsedStart = parseISO(localStart);
+      const parsedEnd = parseISO(localEnd);
+      if (isValidDate(parsedStart) && isValidDate(parsedEnd) && isAfter(parsedStart, parsedEnd)) {
         nextErrors.cross = 'Start date must be before or equal to end date';
       }
     }
@@ -66,8 +60,8 @@ const DateRangeControls: React.FC<Props> = ({ startDate, endDate, onApply, onCle
   const hasErrors = Boolean(errors.start || errors.end || errors.cross);
 
   const onClickApply = () => {
-    const v = validate();
-    if (v.start || v.end || v.cross) return;
+    const validator = validate();
+    if (validator.start || validator.end || validator.cross) return;
 
     if (!localStart && !localEnd) {
       // Nothing set => treat as clearing filter

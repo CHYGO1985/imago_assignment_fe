@@ -25,36 +25,12 @@ const toSearchParams = (params: MediaESSearchQueryParams): URLSearchParams => {
 
   // Encode as searchAfter[]=v1&searchAfter[]=v2
   if (params.searchAfter && params.searchAfter.length) {
-    for (const searchAfterParam of params.searchAfter) urlSearchParams.append('searchAfter[]', searchAfterParam);
+    for (const searchAfterParam of params.searchAfter)
+      urlSearchParams.append('searchAfter[]', searchAfterParam);
   }
 
   return urlSearchParams;
-}
-
-/**
- * Search media items by query, page, and size.
- * @param query - Search keyword
- * @param page  - Page number (0-based)
- * @param size  - Number of items per page
- * @returns A promise resolving to MediaResponse
- */
-// export const searchMedia = async (
-//   query: string,
-//   page: number,
-//   size: number,
-// ): Promise<MediaResponse> => {
-//   const searchParams = {
-//     query,
-//     page: page.toString(),
-//     size: size.toString(),
-//   };
-
-//   const response = await APIClient.get('media/search', {
-//     searchParams,
-//   }).json<MediaResponse>();
-
-//   return response;
-// };
+};
 
 /**
  * Cursor-based search.
@@ -64,15 +40,13 @@ const toSearchParams = (params: MediaESSearchQueryParams): URLSearchParams => {
 export const searchMediaOnESByCursor = async (
   params: MediaESSearchQueryParams,
 ): Promise<CursorResponse> => {
-  const res = await APIClient
-    .get('media/search', { searchParams: toSearchParams(params) })
-    .json<{
-      total: number;
-      size: number;
-      results?: MediaItem[];   // preferred shape from your API
-      hits?: SearchHit[];        // if the API returns raw ES hits instead
-      lastSort?: (string | number)[];
-    }>();
+  const res = await APIClient.get('media/search', { searchParams: toSearchParams(params) }).json<{
+    total: number;
+    size: number;
+    results?: MediaItem[]; // preferred shape from your API
+    hits?: SearchHit[]; // if the API returns raw ES hits instead
+    lastSort?: (string | number)[];
+  }>();
 
   // If your API already returns `results`, use them directly.
   // If it returns `hits`, you’d map them here to `MediaItem[]`.
@@ -89,4 +63,4 @@ export const searchMediaOnESByCursor = async (
     results,
     lastSort,
   };
-}
+};

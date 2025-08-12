@@ -3,7 +3,7 @@ import { FormControlLabel, Switch } from '@mui/material';
 
 type Props = {
   exactMatch: boolean;
-  onChange: (v: boolean) => void;
+  onChange: (value: boolean) => void;
 };
 
 const ExactMatchToggle: React.FC<Props> = ({ exactMatch, onChange }) => {

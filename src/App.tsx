@@ -1,5 +1,5 @@
 import React from 'react';
-import MediaSearchPage from './features/media_search/components/MediaSearchPage';
+import { MediaSearchPage } from './features/media_search/ui/pages';
 import './App.css';
 
 function App() {

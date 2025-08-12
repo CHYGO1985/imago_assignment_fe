@@ -1,16 +1,17 @@
 import React from 'react';
-import { Container, Box, Typography, Button } from '@mui/material';
-import SearchBar from './SearchBar';
-import PageSizeSelect from './PageSizeSelect';
-import CursorPaginationControls from './CursorPaginationControls';
-import MediaTable from './MediaTable';
-import Loading from '../../../common/components/Loading';
-import ErrorComponent from '../../../common/components/Error';
-import DateRangeControls from './DateRangeControls';
-import { searchMediaOnESByCursor } from './sevices/mediaApi';
-import { MediaResponse } from '../types/media.interface';
-import { ISODateString } from '../types';
-import ExactMatchToggle from './ExactMatchToggle';
+import { Container, Box, Typography } from '@mui/material';
+import { ExactMatchToggle } from '../atoms';
+import {
+  SearchBar,
+  PageSizeSelector,
+  CursorPaginationControls,
+  DateRangeControls,
+} from '../molecules';
+import MediaTable from '../organisms/MediaTable';
+import { Loading, ErrorComponent } from '../../../../common/components';
+import { searchMediaOnESByCursor } from '../../components/sevices/mediaApi';
+import { MediaResponse } from '../../types/media.interface';
+import { ISODateString } from '../../types';
 
 type Cursor = string[] | null;
 
@@ -103,7 +104,7 @@ const MediaSearchPage: React.FC = () => {
               setQueryKeyword(q);
             }}
           />
-          <PageSizeSelect
+          <PageSizeSelector
             size={size}
             onChange={(newSize) => {
               setSize(newSize);

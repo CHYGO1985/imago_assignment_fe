@@ -1,7 +1,7 @@
 // src/features/mediaSearch/__tests__/MediaTable.test.tsx
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import MediaTable from '../MediaTable';
+import MediaTable from '../../ui/organisms/MediaTable';
 import { MediaItem } from '../../../../types/media';
 
 const items: MediaItem[] = [

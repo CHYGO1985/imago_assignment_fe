@@ -1,14 +1,14 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import PageSizeSelect from '../PageSizeSelect';
+import PageSizeSelector from '../../ui/molecules/PageSizeSelector';
 
 describe('PageSizeSelect', () => {
   it('renders with the current size and calls onChange when a new size is selected', async () => {
     const user = userEvent.setup();
     const handleChange = jest.fn();
 
-    render(<PageSizeSelect size={15} onChange={handleChange} />);
+    render(<PageSizeSelector size={15} onChange={handleChange} />);
 
     // Grab the combobox by its label
     const select = screen.getByRole('combobox');

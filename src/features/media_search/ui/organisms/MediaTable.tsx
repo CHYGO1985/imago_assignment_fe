@@ -1,5 +1,5 @@
 import React from 'react';
-import { MediaItem } from '../types/media.interface';
+import { MediaItem } from '../../types/media.interface';
 import {
   Table,
   TableHead,

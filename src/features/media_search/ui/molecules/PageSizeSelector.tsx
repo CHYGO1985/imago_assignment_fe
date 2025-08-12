@@ -6,7 +6,7 @@ interface PageSizeSelectProps {
   onChange: (newSize: number) => void;
 }
 
-const PageSizeSelect: React.FC<PageSizeSelectProps> = ({ size, onChange }) => (
+const PageSizeSelector: React.FC<PageSizeSelectProps> = ({ size, onChange }) => (
   <FormControl variant="outlined" size="small" sx={{ minWidth: 120 }}>
     <InputLabel>Page Size</InputLabel>
     <Select value={size} onChange={(e) => onChange(Number(e.target.value))} label="Page Size">
@@ -19,4 +19,4 @@ const PageSizeSelect: React.FC<PageSizeSelectProps> = ({ size, onChange }) => (
   </FormControl>
 );
 
-export default PageSizeSelect;
+export default PageSizeSelector;
