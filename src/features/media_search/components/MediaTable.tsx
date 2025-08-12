@@ -85,26 +85,26 @@ const MediaTable: React.FC<MediaTableProps> = ({ results, sortOrder, onSortToggl
 
         return (
           <TableRow key={item.id} hover>
-            <TableCell>{item.id}</TableCell>
+            <TableCell>{item.id ?? '--'}</TableCell>
             <TableCell sx={{ whiteSpace: 'normal', wordBreak: 'break-word' }}>
-              <TruncatedTextWithTooltip text={item.title} />
+              <TruncatedTextWithTooltip text={item.title ?? '--'} />
             </TableCell>
             <TableCell sx={{ whiteSpace: 'normal', wordBreak: 'break-word' }}>
-              <TruncatedTextWithTooltip text={item.description} emptyPlaceholder="--" />
+              <TruncatedTextWithTooltip text={item.description ?? '--'} />
             </TableCell>
-            <TableCell>{item.photographer}</TableCell>
+            <TableCell>{item.photographer ?? '--'}</TableCell>
             <TableCell>
               {new Date(item.date).toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'short',
                 day: 'numeric',
-              })}
+              }) ?? '--'}
             </TableCell>
             <TableCell>
               <Link href={largeUrl} target="_blank" rel="noopener noreferrer">
                 <img
                   src={smallUrl}
-                  alt={item.title}
+                  alt={'The media file does not exist'}
                   style={{
                     maxWidth: '100px',
                     height: 'auto',
