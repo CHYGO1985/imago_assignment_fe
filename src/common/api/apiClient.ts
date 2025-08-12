@@ -11,7 +11,7 @@ export const APIClient = ky.create({
   timeout: 10_000,
   retry: {
     limit: 2,
-    methods: ['get'], // Only retry GET requests
+    methods: ['get'],
     statusCodes: [408, 413, 429, 500, 502, 503, 504],
   },
 });

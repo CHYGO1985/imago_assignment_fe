@@ -1,6 +1,6 @@
 import { searchMedia } from '../mediaApi';
-import { APIClient } from '../../common/api/apiClient';
-import type { MediaResponse } from '../../types/media';
+import { APIClient } from '../../../../../common/api/apiClient';
+import type { MediaResponse } from '../../../../../types/media';
 
 jest.mock('../../common/api/apiClient', () => ({
   APIClient: {

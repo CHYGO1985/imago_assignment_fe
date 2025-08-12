@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor, within } from '@testing-library/react';
 import MediaSearchPage from '../MediaSearchPage';
-import * as api from '../../../../sevices/mediaApi';
+import * as api from '../sevices/mediaApi';
 import { MediaResponse } from '../../../../types/media';
 
 jest.mock('ky', () => {

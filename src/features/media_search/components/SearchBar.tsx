@@ -17,14 +17,14 @@ const SearchBar: React.FC<SearchBarProps> = ({ query, onSearch }) => {
   return (
     <Box component="form" onSubmit={handleSubmit} display="flex" alignItems="center" mb={2}>
       <TextField
-        label="Search"
+        label="Search Keywords"
         variant="outlined"
         value={value}
         onChange={(e) => setValue(e.target.value)}
         size="small"
       />
       <Button type="submit" variant="contained" sx={{ ml: 2 }}>
-        Search
+        Apply
       </Button>
     </Box>
   );
