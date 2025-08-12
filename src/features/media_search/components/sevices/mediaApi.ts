@@ -1,7 +1,6 @@
 import { APIClient } from '../../../../common/api/apiClient';
-// import type { MediaResponse } from '../../../../types/media';
 import type { SearchHit } from '@elastic/elasticsearch/lib/api/types';
-import { MediaItem, MediaResponse, MediaESSearchQueryParams } from '../../types';
+import { MediaItem, MediaESSearchQueryParams } from '../../types';
 
 export interface CursorResponse {
   total: number;
@@ -43,13 +42,13 @@ export const searchMediaOnESByCursor = async (
   const res = await APIClient.get('media/search', { searchParams: toSearchParams(params) }).json<{
     total: number;
     size: number;
-    results?: MediaItem[]; // preferred shape from your API
+    results?: MediaItem[];
     hits?: SearchHit[]; // if the API returns raw ES hits instead
     lastSort?: (string | number)[];
   }>();
 
   // If your API already returns `results`, use them directly.
-  // If it returns `hits`, you’d map them here to `MediaItem[]`.
+  // If it returns `hits`, map them here to `MediaItem[]`.
   const results: MediaItem[] = (res as any).results ?? [];
 
   // Coerce ES-style mixed tuple into string[]

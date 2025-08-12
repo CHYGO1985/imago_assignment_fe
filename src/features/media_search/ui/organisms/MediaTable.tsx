@@ -92,7 +92,7 @@ const MediaTable: React.FC<MediaTableProps> = ({ results, sortOrder, onSortToggl
             <TableCell sx={{ whiteSpace: 'normal', wordBreak: 'break-word' }}>
               <TruncatedTextWithTooltip text={item.description ?? '--'} />
             </TableCell>
-            <TableCell>{item.photographer ?? '--'}</TableCell>
+            <TableCell>{item.photographer?.trim() ?? '--'}</TableCell>
             <TableCell>
               {new Date(item.date).toLocaleDateString('en-US', {
                 year: 'numeric',

@@ -104,13 +104,13 @@ const MediaSearchPage: React.FC = () => {
               setQueryKeyword(q);
             }}
           />
+          <ExactMatchToggle exactMatch={exactMatch} onChange={(value) => setExactMatch(value)} />
           <PageSizeSelector
             size={size}
             onChange={(newSize) => {
               setSize(newSize);
             }}
           />
-          <ExactMatchToggle exactMatch={exactMatch} onChange={(v) => setExactMatch(v)} />
         </Box>
 
         <Box

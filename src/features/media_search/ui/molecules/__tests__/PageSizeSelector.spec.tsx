@@ -1,7 +1,6 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import PageSizeSelector from '../../ui/molecules/PageSizeSelector';
+import PageSizeSelector from '../PageSizeSelector';
 
 describe('PageSizeSelect', () => {
   it('renders with the current size and calls onChange when a new size is selected', async () => {
@@ -10,7 +9,6 @@ describe('PageSizeSelect', () => {
 
     render(<PageSizeSelector size={15} onChange={handleChange} />);
 
-    // Grab the combobox by its label
     const select = screen.getByRole('combobox');
     expect(select).toHaveTextContent('15');
 

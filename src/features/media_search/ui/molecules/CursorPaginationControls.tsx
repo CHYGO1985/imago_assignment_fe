@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Button, Typography } from '@mui/material';
 
 interface Props {
-  pageIndex: number;         // 0-based, derived from cursor stack
+  pageIndex: number;
   canPrev: boolean;
   canNext: boolean;
   onPrev: () => void;

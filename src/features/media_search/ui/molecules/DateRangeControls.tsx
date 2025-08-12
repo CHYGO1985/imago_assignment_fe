@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, TextField, Button, Tooltip } from '@mui/material';
-import { parseISO, isValid as isValidDate, isAfter } from 'date-fns';
+import { isAfter } from 'date-fns';
 
 type Props = {
   startDate?: string; // 'YYYY-MM-DD'
@@ -24,27 +24,13 @@ const DateRangeControls: React.FC<Props> = ({ startDate, endDate, onApply, onCle
   const validate = React.useCallback(() => {
     const nextErrors: typeof errors = {};
 
-    // Both optional, but if one is present, the other must be present to apply
-    if (localStart) {
-      const paredStart = parseISO(localStart);
-      if (!isValidDate(paredStart)) nextErrors.start = 'Invalid start date';
-    }
-    if (localEnd) {
-      const parsedEnd = parseISO(localEnd);
-      if (!isValidDate(parsedEnd)) nextErrors.end = 'Invalid end date';
-    }
-
-    if (localStart && localEnd) {
-      const parsedStart = parseISO(localStart);
-      const parsedEnd = parseISO(localEnd);
-      if (isValidDate(parsedStart) && isValidDate(parsedEnd) && isAfter(parsedStart, parsedEnd)) {
-        nextErrors.cross = 'Start date must be before or equal to end date';
-      }
-    }
-
     // If user provided only one side, we require both to apply
     if ((localStart && !localEnd) || (!localStart && localEnd)) {
       nextErrors.cross = 'Please provide both start and end dates';
+    }
+
+    if (localStart && localEnd && isAfter(localStart, localEnd)) {
+      nextErrors.cross = 'Start date must be before or equal to end date';
     }
 
     setErrors(nextErrors);
