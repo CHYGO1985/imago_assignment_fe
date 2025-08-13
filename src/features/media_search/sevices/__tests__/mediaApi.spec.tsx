@@ -2,7 +2,7 @@ import { searchMediaOnESByCursor } from '../mediaApi';
 import { APIClient } from '../../../../common/api/apiClient';
 import { MediaESSearchQueryParams } from '../../types';
 
-jest.mock('../../../../../common/api/apiClient', () => ({
+jest.mock('../../../../common/api/apiClient', () => ({
   APIClient: {
     get: jest.fn(),
   },

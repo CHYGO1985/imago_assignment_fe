@@ -1,7 +1,6 @@
 import { render, screen, fireEvent, waitFor, within } from '@testing-library/react';
 import MediaSearchPage from '../MediaSearchPage';
 import { searchMediaOnESByCursor } from '../../../sevices/mediaApi';
-import userEvent from '@testing-library/user-event';
 
 jest.mock('ky', () => {
   const mockJson = jest.fn().mockResolvedValue({});
@@ -16,7 +15,7 @@ jest.mock('ky', () => {
   };
 });
 
-jest.mock('../../../components/sevices/mediaApi', () => ({
+jest.mock('../../../sevices/mediaApi', () => ({
   __esModule: true,
   searchMediaOnESByCursor: jest.fn(),
 }));
