@@ -2,9 +2,9 @@ import ky from 'ky';
 
 /**
  * Shared HTTP client for all API calls.
- * - Base URL: /api/v1
- * - 10s timeout
- * - Retries GET requests up to 2 times on common server/network errors
+ * Base URL: /api/v1
+ * 10s timeout
+ * Retries GET requests up to 2 times on common server/network errors
  */
 export const APIClient = ky.create({
   prefixUrl: '/api/v1',

@@ -9,7 +9,7 @@ import {
 } from '../molecules';
 import MediaTable from '../organisms/MediaTable';
 import { Loading, ErrorComponent } from '../../../../common/components';
-import { searchMediaOnESByCursor } from '../../components/sevices/mediaApi';
+import { searchMediaOnESByCursor } from '../../sevices/mediaApi';
 import { MediaResponse } from '../../types/media.interface';
 import { ISODateString } from '../../types';
 

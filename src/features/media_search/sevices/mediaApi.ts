@@ -1,6 +1,6 @@
-import { APIClient } from '../../../../common/api/apiClient';
+import { APIClient } from '../../../common/api/apiClient';
 import type { SearchHit } from '@elastic/elasticsearch/lib/api/types';
-import { MediaItem, MediaESSearchQueryParams } from '../../types';
+import { MediaItem, MediaESSearchQueryParams } from '../types';
 
 export interface CursorResponse {
   total: number;
