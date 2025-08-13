@@ -46,6 +46,7 @@ const MediaSearchPage: React.FC = () => {
         sortOrder,
         startDate,
         endDate,
+        exactMatch,
         // Omit searchAfter for the first page (null)
         ...(currentCursor ? { searchAfter: currentCursor } : {}),
       });
