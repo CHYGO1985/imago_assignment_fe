@@ -92,19 +92,27 @@ const MediaSearchPage: React.FC = () => {
         <Box
           sx={{
             display: 'flex',
-            flexDirection: 'row',
+            justifyContent: 'space-between',
             alignItems: 'baseline',
-            gap: 6,
-            mb: '1rem',
+            mb: 2,
           }}
         >
-          <SearchBar
-            query={queryKeyword}
-            onSearch={(q) => {
-              setQueryKeyword(q);
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'baseline',
+              gap: 6,
             }}
-          />
-          <ExactMatchToggle exactMatch={exactMatch} onChange={(value) => setExactMatch(value)} />
+          >
+            <SearchBar
+              query={queryKeyword}
+              onSearch={(q) => {
+                setQueryKeyword(q);
+              }}
+            />
+            <ExactMatchToggle exactMatch={exactMatch} onChange={(value) => setExactMatch(value)} />
+          </Box>
           <PageSizeSelector
             size={size}
             onChange={(newSize) => {
