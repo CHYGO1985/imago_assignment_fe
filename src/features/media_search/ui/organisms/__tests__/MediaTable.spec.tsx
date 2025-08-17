@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, within } from '@testing-library/react';
 import MediaTable from '../MediaTable';
-import { MediaItem } from '../../../../../types/media';
+import { MediaItem } from 'features/media_search/types';
 
 const items: MediaItem[] = [
   {

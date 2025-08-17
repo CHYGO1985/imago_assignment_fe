@@ -8,10 +8,9 @@ import {
   DateRangeControls,
 } from '../molecules';
 import MediaTable from '../organisms/MediaTable';
-import { Loading, ErrorComponent } from '../../../../common/components';
-import { searchMediaOnESByCursor } from '../../sevices/mediaApi';
-import { MediaResponse } from '../../types/media.interface';
-import { ISODateString } from '../../types';
+import { Loading, ErrorComponent } from 'common/components';
+import { searchMediaOnESByCursor } from 'features/media_search/sevices/mediaApi';
+import { MediaResponse, ISODateString } from 'features/media_search/types';
 
 type Cursor = string[] | null;
 
